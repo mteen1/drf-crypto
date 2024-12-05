@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crpt-django
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: crpt-django
+  template:
+    metadata:
+      labels:
+        app: crpt-django
+    spec:
+      containers:
+      - name: django
+        image: crpt_production_django:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DJANGO_SETTINGS_MODULE
+          value: "config.settings.production"
