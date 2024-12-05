@@ -1,0 +1,16 @@
+services:
+  docs:
+    image: crpt_local_docs
+    container_name: crpt_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./crpt:/app/crpt:z
+    ports:
+      - '9000:9000'
+    command: /start-docs
